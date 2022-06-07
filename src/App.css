@@ -1,38 +1,256 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Livvic&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #1D1D1B;
+  font-family: 'Livvic', sans-serif;
+}
+body{
+  overflow-x: hidden;
+  width:100%;
+}
+.grid-alignment {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn-container {
+  padding: 2rem 0;
+  grid-column: 2/2;
+  right: -30%;
+  position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#show-more-btn {
+  all: unset;
+  bottom: 1rem;
+  position: absolute;
+  right: 25%;
+  font-size: 1.3rem;
+  font-weight: 700;
+  grid-column: 2/2;
+  text-align: right;
+  cursor: pointer;
+}
+
+#show-more-btn::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #0097CC;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+#show-more-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.filter h6 {
+  color: #7F7F7F;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.filter {
+  height: 100vh;
+  padding: 5rem 2rem;
+}
+
+.filter-link {
+  color: #1D1D1B;
+  cursor: pointer;
+}
+
+.filter-item {
+  font-weight: 900;
+  font-size: 1.8rem;
+  margin-left: 0.4rem;
+  transition: 0.4s;
+}
+
+.filter-menu {
+  display: none;
+}
+
+.filter-menu-toggled {
+  display: block;
+}
+
+.arrow-rotated {
+  transform: rotateX(180deg);
+  transition: 0.4s;
+}
+
+.arrow {
+  transition: 0.4s;
+}
+
+.filter-item:hover {
+  color: #0097CC;
+  transition: 0.4s;
+}
+
+.filter-item-toggled {
+  color: #0097CC;
+}
+
+li {
+  list-style-type: none;
+  padding: 0.4rem 0;
+}
+
+li a {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+}
+
+a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  text-transform: capitalize;
+}
+
+.biggy-title {
+  grid-column: 2/2;
+  padding-left: 5rem;
+}
+
+.biggy-title h1 {
+  font-size: 2.3rem;
+  font-weight: 900;
+}
+
+.items-displayed {
+  display: flex;
+  flex-direction: row;
+}
+
+.items-displayed h6 {
+  opacity: 0.7;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.items-displayed .counter {
+  opacity: 1;
+  padding-left: 0.2rem;
+  font-weight: 900;
+}
+.filter-mobile{
+  display:none;
+}
+
+@media only screen and (max-width: 800px) {
+  .navbar {
+    padding-right: 1rem;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loading-screen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #b7bfc2;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.spinner {
+  margin: auto;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border-left: 10px solid rgb(255, 0, 0);
+  border-top: 10px solid rgb(181, 28, 36);
+  border-bottom: 10px solid rgb(129, 44, 48);
+  border-right: 10px solid rgb(93, 34, 37);
+  z-index: 10;
+  animation-duration: 1s;
+  animation-name: spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-@keyframes App-logo-spin {
-  from {
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+
+  100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+
+  .grid-alignment {
+    width: 100vw;
+    grid-template-columns: 1fr;
+    grid-template-areas: "filter" "title" "workshops";
+  }
+
+  .btn-container {
+    padding: 2rem 0;
+    grid-column: 1/1;
+    position: relative;
+  }
+
+  #show-more-btn {
+    all: unset;
+    bottom: 1rem;
+    position: absolute;
+    right: 40%;
+    font-size: 1.3rem;
+    font-weight: 700;
+    grid-column: 1/1;
+    text-align: right;
+    cursor: pointer;
+  }
+  .biggy-title {
+    font-size: 1.7rem;
+    grid-area: title;
+    display:inline-block;
+    grid-column: 1/1;
+    padding-left: 1rem;
+    width:100vw;
+    height: auto;
+  }
+  .filter{
+    display:none
+  }
+  .filter-link-disabled{
+    display:none;
+  }
+  .clear{
+    display:none;
+  }
+  .filter-mobile{
+    grid-area: filter;
+    padding-top: 8rem;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    display:block;
+  }
+  .filter-mobile-current{
+    text-transform: capitalize;
+    font-size: 1.5rem;
+  }
+  .filter-box-mobile{
+    display:block;
+  }
+  .filter-box-mobile-off{
+    display:none;
   }
 }
